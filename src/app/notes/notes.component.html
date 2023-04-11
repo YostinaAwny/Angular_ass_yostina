@@ -1,0 +1,51 @@
+<div class="w-75 mx-auto py-5">
+  <h2>Reactive Forms </h2>
+  {{productForm.value | json}}
+
+
+      <form [formGroup]="productForm" >
+    <div>
+
+      <label for="Name">Name:</label>
+      <input [class.is-invalid]="prodName?.invalid &&
+      prodName?.touched" formControlName="Name" class="form-control" type="text" id="Name">
+      <div *ngIf="prodName?.errors != null &&
+      prodName?.touched "
+      class="alert alert-primary mt-2">
+        <p *ngIf="prodName?.errors?.['required']" >Name is required</p>
+        <p class="text-danger" *ngIf="prodName?.errors?.['NotAllowedNames']">{{prodName?.errors?.['NotAllowedNames'].value}} not allowed</p>
+      </div>
+    </div>
+    <div class="form-group my-3">
+      <select formControlName="Products" class="form-select" aria-label="Default select example">
+        <option *ngFor="let product of products">{{product.Name}}</option>
+      </select>
+    </div>
+
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" formControlName="discountCheckbox">
+      <label class="form-check-label">product discount</label>
+    </div>
+
+    <div *ngIf="productForm.get('discountCheckbox')?.value" class="form-group">
+      <label for="discountValue">Discount Value in Percent</label>
+      <input type="number" class="form-control" formControlName="discountValue" required>
+    </div>
+
+    <div formArrayName="coments" *ngFor="let item of coments.controls;let i = index">
+
+      <label for=`${i}` class="mt-2">Your comment</label>
+      <input type="text" id=`${i}` class="form-control my-2" formControlName="i">
+      <br>
+      <button class="btn btn-danger my-3" (click)="removeComment(i)">removeComment</button>
+    </div>
+
+
+
+    <button [class]="productForm.valid?'btn btn-success':'btn btn-danger'" [disabled]="productForm.invalid" type="submit" >Register</button>
+    <button class="btn btn-primary mx-5" (click)="addComment()">addComment</button>
+
+  </form>
+</div>
+
+

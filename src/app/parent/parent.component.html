@@ -1,0 +1,21 @@
+<p>parent works!</p>
+<app-child (ChildProd) = " parentProds = $event"></app-child>
+<table  class="table table-bordered table-hover text-center p-2 w-75 mx-auto border">
+  <thead class="border">
+    <th class="border">ID</th>
+    <th class="border">Name</th>
+    <th class="border">Quantity</th>
+    <th class="border">Price</th>
+    <th class="border">Img</th>
+  </thead>
+  <tbody class="border">
+    <tr *ngFor="let product of parentProds" class="border">
+      <td class="border">{{product.ID}}</td>
+      <td class="border">{{product.Name}}</td>
+      <td class="border">{{product.Quantity}}</td>
+      <td class="border">{{product.Price}}</td>
+      <td class="border"><img width="100px" height="100px" [src]= "product.Img" alt=""/></td>
+
+    </tr>
+  </tbody>
+  </table>

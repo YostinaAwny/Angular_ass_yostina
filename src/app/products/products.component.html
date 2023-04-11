@@ -1,0 +1,116 @@
+<p>Hellow in Product</p>
+<h1>{{Store_name}}</h1>
+<img [src]="Store_Logo">
+
+<!-- <ng-template #NoDis>
+  <h3>Sorry there is No Discound :'(</h3>
+</ng-template>
+<h3 *ngIf="Discount != 'NoDiscount'; else NoDis ">We offer an explicit discount of: {{Discount}}</h3> -->
+
+<h3 *ngIf="Discount != 'NoDiscount'">We offer an explicit discount of: {{Discount}}</h3>
+<br>
+<select>
+  <option *ngFor="let cat of CategoryList "value="cat.ID">{{cat.Name}}</option>
+</select>
+
+<hr>
+<hr>
+<ng-template #thx>
+  <div class="text-center">Thanks for purchasing from our Store {{ClientName}}</div>
+</ng-template>
+
+<button (click)="buyProduct()">Change IsPurchased Flag </button>
+<table *ngIf="IsPurchased; else thx" class="table table-bordered table-hover text-center p-2 w-75 mx-auto border">
+<thead class="border">
+  <th class="border">ID</th>
+  <th class="border">Name</th>
+  <th class="border">Quantity</th>
+  <th class="border">Price</th>
+  <th class="border">Img</th>
+</thead>
+<tbody class="border">
+  <tr *ngFor="let product of ProductList" class="border">
+    <td class="border">{{product.ID}}</td>
+    <td class="border">{{product.Name}}</td>
+    <td class="border">{{product.Quantity}}</td>
+    <td class="border">{{product.Price}}</td>
+    <td class="border"><img width="100px" height="100px" [src]= "product.Img" alt=""/></td>
+
+  </tr>
+</tbody>
+</table>
+
+
+<label for="userName">UserName</label>
+<input type="text" id="userName" class="from-control" [(ngModel)]='ClientName'/>
+{{ClientName}}
+<input type="text" >
+<hr>
+<hr>
+
+<h2>{{Store_name|lowercase}}</h2>
+<!-- <h3 *ngIf="Discount != 'NoDiscount'">{{Discount | percent}}
+</h3> -->
+<hr>
+<hr>
+<hr>
+
+<input type="number" [(ngModel)]="prdId">
+<button (click)="getById(prdId)">GetProductByID </button>
+
+<table class="table table-bordered table-hover text-center p-2 w-75 mx-auto border">
+  <thead class="border">
+    <th class="border">ID</th>
+    <th class="border">Name</th>
+    <th class="border">Quantity</th>
+    <th class="border">Price</th>
+    <th class="border">Img</th>
+  </thead>
+  <tbody class="border">
+    <tr class="border">
+      <td class="border">{{oneProduct.ID}}</td>
+      <td class="border">{{oneProduct.Name}}</td>
+      <td class="border">{{oneProduct.Quantity}}</td>
+      <td class="border">{{oneProduct.Price}}</td>
+      <td class="border"><img width="100px" height="100px" [src]= "oneProduct.Img" alt=""/></td>
+
+    </tr>
+  </tbody>
+  </table>
+
+  <hr>
+  <hr>
+  <ng-template #D7k>
+    <div class="text-center">D777777777777k</div>
+  </ng-template>
+
+  <button (click)="showProducts()">showProducts</button>
+  <table *ngIf="displayProducts; else D7k" class="table table-bordered table-hover text-center p-2 w-75 mx-auto border">
+    <thead class="border">
+      <th class="border">ID</th>
+      <th class="border">Name</th>
+      <th class="border">Quantity</th>
+      <th class="border">Price</th>
+      <th class="border">Img</th>
+    </thead>
+    <tbody class="border">
+      <tr *ngFor="let product of ProductList" class="border">
+        <td class="border">{{product.ID}}</td>
+        <td class="border">{{product.Name}}</td>
+        <td class="border">{{product.Quantity}}</td>
+        <td class="border">{{product.Price}}</td>
+        <td class="border"><img width="100px" height="100px" [src]= "product.Img" alt=""/></td>
+
+      </tr>
+    </tbody>
+    </table>
+
+    <hr>
+    <hr>
+    <h1>Children</h1>
+    <button (click)="discount()" class="btn btn-primary">Discount</button>
+    <button (click)="withoutdiscount()" class="btn btn-primary">Without Discount</button>
+
+    <router-outlet></router-outlet>
+
+

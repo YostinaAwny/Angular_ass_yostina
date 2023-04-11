@@ -1,0 +1,85 @@
+<div class="w-75 mx-auto py-5">
+  <h2>Reactive Forms </h2>
+  {{registerationForm.value | json}}
+
+
+      <form [formGroup]="registerationForm" (ngSubmit)="submitted() ">
+    <div>
+
+      <label for="user_name">User_name:</label>
+      <input [class.is-invalid]="registerationForm.get('user_name')?.invalid &&
+      registerationForm.get('user_name')?.touched" formControlName="user_name" class="form-control" type="text" id="user_name">
+      <div *ngIf="registerationForm.get('user_name')?.errors != null &&
+      registerationForm.get('user_name')?.touched "
+      class="alert alert-primary mt-2">
+        <p *ngIf="registerationForm.get('user_name')?.errors?.['required']" >User_name is required</p>
+        <p *ngIf="registerationForm.get('user_name')?.errors?.['minlength']" >User_name minLength is 3</p>
+        <p *ngIf="registerationForm.get('user_name')?.errors?.['maxlength']">User_name maxLength is 10</p>
+        <p *ngIf="registerationForm.get('user_name')?.errors?.['pattern']">User_name is not vaild</p>
+
+        <p class="text-danger" *ngIf="registerationForm.get('user_name')?.errors?.['forbiddenName']">{{registerationForm.get('user_name')?.errors?.['forbiddenName'].value}} not allowed</p>
+        <p class="text-success" *ngIf="registerationForm.get('user_name')?.errors?.['forbiddenUser']">{{registerationForm.get('user_name')?.errors?.['forbiddenUser'].value}} not allowed</p>
+
+      </div>
+
+    </div>
+
+    <div>
+      <label for="password">password:</label>
+      <input [class.is-invalid]="pass?.invalid && pass?.touched" formControlName="password" class="form-control" type="password" id="password">
+      <div *ngIf="pass?.errors !=null && pass?.touched"
+      class="alert alert-primary mt-2">
+        <p *ngIf="pass?.errors?.['required']">password is required</p>
+        <p *ngIf="pass?.errors?.['pattern']">password is not vaild</p>
+      </div>
+    </div>
+
+    <div>
+      <label for="confirmPassword">confirmPassword:</label>
+      <input  [class.is-invalid]="confirmpass?.invalid && confirmpass?.touched"
+      formControlName="confirmPassword" class="form-control" type="password" id="confirmPassword">
+      <small class="text-danger" *ngIf="registerationForm.errors?.['misMatch']">pass and confirm are not matched</small>
+      <div *ngIf="confirmpass?.errors !=null && confirmpass?.touched"
+      class="alert alert-primary mt-2">
+        <p *ngIf="confirmpass?.errors?.['required']">confirmPassword is required</p>
+        <p *ngIf="confirmpass?.errors?.['pattern']">confirmPassword is not vaild</p>
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control"
+      formControlName="email"
+      [class.is.invalid]="email?.errors != null && email?.touched">
+      <div *ngIf="email?.errors !=null && email?.touched"
+      class="alert alert-primary mt-2">
+        <p *ngIf="email?.errors?.['required']">email is required</p>
+        <p *ngIf="email?.errors?.['email']">email is not vaild</p>
+
+      </div>
+    </div>
+    <!-- <div>
+      <input type="checkbox" name="" id="chebx"
+      class="form-chech-input"
+      formControlName="subscribe"
+      (click)="setEmailValidators()"
+      >
+      <label for="chebx">Send me offers</label>
+    </div> -->
+
+    <div class="form-group my-3">
+      <select formControlName="Selection" class="form-select" aria-label="Default select example">
+
+        <option disabled [defaultSelected]="defaultselevted">Where You Hear About Us</option>
+        <option >Facebook</option>
+        <option >Twitter</option>
+        <option >Google</option>
+      </select>
+    </div>
+
+    <button [class]="registerationForm.valid?'btn btn-success':'btn btn-danger'" [disabled]="registerationForm.invalid" type="submit" >Register</button>
+
+  </form>
+</div>
+
+
